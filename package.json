@@ -6,6 +6,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "tailwindcss": "^1.1.2"
+    "tailwindcss": "^1.1.2",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
   }
 }

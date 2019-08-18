@@ -25,3 +25,5 @@ node_modules/
 
 # Brunch output folder.
 dist/
+
+src/js/index.js
