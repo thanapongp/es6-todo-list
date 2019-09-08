@@ -3,7 +3,8 @@ import { htmlToElement } from './utils';
 export default class App {
   constructor() {
     this.input = document.getElementById('input');
-    this.listRoot =  document.getElementById('list-root');
+    this.listRoot = document.getElementById('list-root');
+    this.emptyState = document.getElementById('empty-state').cloneNode(true);
 
     this.initInput();
   }
@@ -26,7 +27,7 @@ export default class App {
     const addedTime = new Date().toLocaleString();
 
     const item = htmlToElement(`
-    <li class="flex py-4 border-b border-gray-900">
+    <li class="flex py-4 border-b border-gray-900 item">
       <div>
         <input type="checkbox">
       </div>
@@ -45,12 +46,33 @@ export default class App {
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
           </svg>
         </button>
-        <button class="text-gray-600 text-2xl">&times;</button>
+        <button class="text-gray-600 text-2xl delete-button">&times;</button>
       </div>
     </li>
     `);
 
+    item.getElementsByClassName('delete-button')[0].addEventListener('click', () => this.deleteItem(item));
+
     this.listRoot.appendChild(item);
+    this.evaluateEmptyState();
     this.input.value = '';
+  }
+
+  deleteItem(item) {
+    item.remove();
+    this.evaluateEmptyState();
+  }
+
+  evaluateEmptyState() {
+    if (this.listRoot.getElementsByClassName('item').length === 0) {
+      this.listRoot.appendChild(this.emptyState);
+      return;
+    }
+
+    const emptyState = document.getElementById('empty-state');
+
+    if (emptyState) {
+      emptyState.remove();
+    }
   }
 }
