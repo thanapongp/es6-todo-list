@@ -3,3 +3,7 @@ export function htmlToElement(html) {
   template.innerHTML = html.trim();
   return template.content.firstElementChild;
 }
+
+export function insertElementAfter(newNode, referenceNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
